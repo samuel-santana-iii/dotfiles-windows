@@ -45,7 +45,7 @@ function gp { git push $args }
 function gd { git diff $args }
 function gl { git pull $args }
 function gst { git status $args }
-function gsta { git stash add $args }
+function gsta { git stash $args }
 function gstp { git stash pop $args }
 function gstl { git stash list $args }
 function glo { git log --oneline --decorate $args }
