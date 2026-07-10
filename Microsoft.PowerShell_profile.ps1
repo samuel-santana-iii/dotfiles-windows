@@ -41,6 +41,7 @@ function gs { git status $args }
 function ga { git add $args }
 function gc { git commit -v $args }
 function gco { git checkout $args }
+function gb { git branch $args }
 function gp { git push $args }
 function gd { git diff $args }
 function gl { git pull $args }
