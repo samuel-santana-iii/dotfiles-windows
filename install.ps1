@@ -73,6 +73,20 @@ Install-PSMod -Name "posh-git"
 Install-PSMod -Name "PSFzf"
 Install-PSMod -Name "Terminal-Icons" # Companion for Starship
 
+# --- Register local bin in PATH ---
+$localBin = "$HOME\.local\bin" # Uses $HOME to be dynamically generic for any user
+
+if (-not (Test-Path $localBin)) {
+    New-Item -ItemType Directory -Path $localBin -Force | Out-Null
+}
+
+$userPath = [Environment]::GetEnvironmentVariable("Path", "User")
+if ($userPath -split ';' -notcontains $localBin) {
+    $newPath = if ([string]::IsNullOrEmpty($userPath)) { $localBin } else { "$userPath;$localBin" }
+    [Environment]::SetEnvironmentVariable("Path", $newPath, "User")
+    $env:Path += ";$localBin" # Updates current installer session immediately
+}
+
 # --- Deploy Profile ---
 Write-Header "Deploying Dotfiles"
 
